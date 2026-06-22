@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)file:///Users/angeloargyriou/Downloads/index_3.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Angelo — Nutrition &amp; Recomp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="./index_files/css2" rel="stylesheet">
+<script src="./index_files/chart.umd.js"></script>
+<style>
+  :root{
+    --bg:#f6f8fa; --surface:#ffffff; --raised:#eef3f7; --border:#dde5ec;
+    --border-s:#c4d2dd;
+    --text:#1b2733; --head:#15222e; --t2:#5a6b7a; --t3:#90a0ad;
+    --coral:#0e9aa7; --orange:#df8a3c; --gold:#caa53a; --pink:#c2607f; --violet:#7b6cb0; --sky:#3a8fb5;
+    --green:#2e9e6b; --red:#d6604a;
+    --d:'IBM Plex Sans',sans-serif; --b:'IBM Plex Sans',sans-serif; --m:'IBM Plex Mono',monospace;
+    --sunset:linear-gradient(90deg,#0e9aa7,#36b6bf);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:var(--b);line-height:1.5;padding:0 0 3rem}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 18px}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  header{position:relative;padding:30px 0 20px;margin-bottom:22px;overflow:hidden}
+  header::before{content:'';position:absolute;inset:0;background:
+     radial-gradient(120% 90% at 92% -30%,rgba(14,154,167,0.10),transparent 60%);
+     pointer-events:none}
+  .hbar{height:4px;width:64px;background:var(--sunset);border-radius:3px;margin-bottom:16px}
+  .eyebrow{font-family:var(--m);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--coral);margin-bottom:8px}
+  h1{font-family:var(--d);font-weight:600;font-size:32px;letter-spacing:-0.02em;line-height:1.05;color:var(--head)}
+  .sub{color:var(--t2);font-size:13.5px;margin-top:7px}
+  nav{display:flex;gap:4px;margin:22px 0 20px;flex-wrap:wrap}
+  .tab{font-family:var(--b);font-weight:600;font-size:13px;color:var(--t2);background:var(--surface);
+    border:1px solid var(--border);padding:8px 15px;cursor:pointer;border-radius:20px;transition:.15s}
+  .tab.on{color:#fff;background:var(--sunset);border-color:transparent}
+  .tab:hover:not(.on){color:var(--text);border-color:var(--border-s)}
+  .panel{display:none;animation:f .3s} .panel.on{display:block}
+  .wnav{display:flex;gap:8px;margin:0 0 16px;flex-wrap:wrap}
+  .wtab{font-family:var(--b);font-weight:600;font-size:12.5px;color:var(--t2);background:var(--raised);
+    border:1px solid var(--border-s);padding:7px 14px;cursor:pointer;border-radius:9px;transition:.15s}
+  .wtab.on{color:var(--head);background:var(--surface);border-color:var(--coral);box-shadow:inset 0 -2px 0 var(--coral)}
+  .wtab:hover:not(.on){color:var(--text)}
+  .wpanel{display:none;animation:f .3s} .wpanel.on{display:block}
+  @keyframes f{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+  .grid{display:grid;gap:15px} .g2{grid-template-columns:1fr 1fr}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px 20px;
+    box-shadow:0 1px 2px rgba(20,40,60,.05)}
+  .card h3{font-family:var(--d);font-weight:600;font-size:17px;margin-bottom:2px;color:var(--head)}
+  .card .note{font-size:12.5px;color:var(--t2);margin-bottom:14px}
+  .chartbox{position:relative;width:100%}
+  .prog{margin-bottom:18px}.prog:last-child{margin-bottom:0}
+  .prog .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px}
+  .prog .lab{font-size:13px;color:var(--t2)}
+  .prog .val{font-family:var(--d);font-weight:600;font-size:17px}
+  .prog .val small{color:var(--t3);font-weight:400;font-size:12px}
+  .track{height:11px;background:var(--raised);border-radius:6px;overflow:hidden}
+  .track i{display:block;height:100%;border-radius:6px;transition:width .7s}
+  .track i.p{background:var(--sunset)} .track i.c{background:linear-gradient(90deg,var(--orange),var(--gold))}
+  .hint{font-size:11.5px;color:var(--t3);margin-top:6px}
+  .stat{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:4px}
+  .stat .s{background:var(--raised);border:1px solid var(--border);border-radius:13px;padding:13px 15px}
+  .stat .k{font-family:var(--m);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--t3)}
+  .stat .v{font-family:var(--d);font-weight:600;font-size:23px;margin-top:4px}
+  .stat .d{font-size:11px;color:var(--t2);margin-top:2px}
+  .meals{margin-top:2px}
+  .day-h{font-family:var(--m);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--coral);margin:14px 0 8px}
+  .meal{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)}
+  .meal:last-child{border-bottom:none}
+  .meal .nm{flex:1;min-width:0}
+  .meal .t{font-weight:600;font-size:13.5px}
+  .meal .s{font-size:11.5px;color:var(--t2);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .meal .p{font-family:var(--m);font-weight:700;font-size:14px;color:var(--coral);white-space:nowrap}
+  .meal .cal{font-family:var(--m);font-size:12px;color:var(--t2);white-space:nowrap;width:62px;text-align:right}
+  .recomp{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px}
+  .rc{background:var(--raised);border:1px solid var(--border);border-radius:14px;padding:16px 18px}
+  .rc .k{font-family:var(--m);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--t3)}
+  .rc .v{font-family:var(--d);font-weight:600;font-size:25px;margin-top:5px}
+  .rc .d{font-size:11.5px;color:var(--t2);margin-top:3px}
+  .insight{background:var(--raised);border:1px solid var(--border);border-left:3px solid var(--coral);
+    border-radius:0 12px 12px 0;padding:14px 18px;margin-top:4px;font-size:13px;color:var(--t2)}
+  .insight b{color:var(--text);font-weight:600}
+  table td{font-size:12.5px}
+  .foot{margin-top:26px;padding-top:16px;border-top:1px solid var(--border);font-size:11.5px;color:var(--t3);font-family:var(--m)}
+  @media(max-width:720px){.g2{grid-template-columns:1fr}.stat{grid-template-columns:repeat(2,1fr)}.recomp{grid-template-columns:1fr 1fr}h1{font-size:27px}}
+</style>
+</head>
+<body>
+<h2 class="sr-only">Nutrition and recomposition dashboard, light clinical theme.</h2>
+<header>
+  <div class="wrap">
+    <div class="hbar"></div>
+    <div class="eyebrow">Food log × recomp · weight-neutral</div>
+    <h1>Nutrition &amp; recomp</h1>
+    <div class="sub">Drop fat, build muscle, hold ~75kg · targets 150g protein / ~2,600 cal</div>
+  </div>
+</header>
+<div class="wrap">
+  <nav>
+    <button class="tab on" data-p="today">Today</button>
+    <button class="tab" data-p="trends">Daily trends</button>
+    <button class="tab" data-p="meals">Meals</button>
+    <button class="tab" data-p="recomp">Recomp</button>
+    <button class="tab" data-p="training">Training</button>
+    <button class="tab" data-p="bloods">Bloods</button>
+  </nav>
+  <section class="panel on" id="today">
+    <div class="grid g2">
+      <div class="card">
+        <h3>Monday — so far</h3>
+        <div class="note">Fasted APL ride done (31 km), recovery smoothie in. Chest session PM still to come.</div>
+        <div class="prog">
+          <div class="top"><span class="lab">Protein</span><span class="val">65<small> / 150 g</small></span></div>
+          <div class="track"><i class="p" style="width:43%"></i></div>
+          <div class="hint">43% on one smoothie — 85 g to go across lunch + dinner</div>
+        </div>
+        <div class="prog">
+          <div class="top"><span class="lab">Calories eaten</span><span class="val">397<small> / 2,850 burn</small></span></div>
+          <div class="track"><i class="c" style="width:14%"></i></div>
+          <div class="hint">Light so far — plenty of room for the day</div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Today's macro split</h3>
+        <div class="note">Grams by macro · fills in as the day's logged.</div>
+        <div class="chartbox" style="height:200px"><canvas id="ring" width="865" height="400" style="display: block; box-sizing: border-box; height: 200px; width: 432px;"></canvas></div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:15px">
+      <h3>Monday — logged so far</h3>
+      <div class="note">Garmin burn 2,850. Fasted ride, then recovery smoothie. Chest PM + lunch/dinner still to come.</div>
+      <div class="stat" style="grid-template-columns:repeat(3,1fr)">
+        <div class="s"><div class="k">Burned</div><div class="v">2,850<small style="font-size:12px;color:var(--t3)"> cal</small></div><div class="d">Garmin · ride day</div></div>
+        <div class="s"><div class="k">Eaten</div><div class="v">397<small style="font-size:12px;color:var(--t3)"> cal</small></div><div class="d">2 entries logged</div></div>
+        <div class="s"><div class="k">Net so far</div><div class="v" style="color:#74c490">−2,453<small style="font-size:12px;color:var(--t3)"> cal</small></div><div class="d">preliminary · lunch + dinner pending</div></div>
+      </div>
+      <div style="margin-top:14px">
+        <div class="meal"><div class="nm"><div class="t">Espresso — single, black</div><div class="s">pre-ride, fasted</div></div><div class="p">0g</div><div class="cal">2 cal</div></div>
+        <div class="meal"><div class="nm"><div class="t">Post-ride smoothie</div><div class="s">2 scoops VPA, ½ banana, ½ cup blueberries, ½ cup Chobani Greek yoghurt, water</div></div><div class="p">65g</div><div class="cal">395 cal</div></div>
+      </div>
+      <div class="insight" style="margin-top:14px"><b>Big protein smoothie.</b> 65 g from one shake — the Chobani (12 g per half-cup, basically fat-free) stacked on top of 2 scoops VPA makes this a proper recovery hit. You're already 43% to protein target with most of the day left. The −2,453 net is just because lunch and dinner aren't in yet — it'll close up.</div>
+    </div>
+  </section>
+  <section class="panel" id="trends">
+    <div class="card" style="margin-bottom:15px">
+      <h3>Daily protein vs 150 g target</h3>
+      <div class="note">The number that drives recomp. Dashed line is the 150 g target — cleared on five of the six logged days.</div>
+      <div class="chartbox" style="height:240px"><canvas id="pchart" height="0" style="display: block; box-sizing: border-box; height: 0px; width: 0px;" width="0"></canvas></div>
+    </div>
+    <div class="grid g2">
+      <div class="card">
+        <h3>Calories vs maintenance</h3>
+        <div class="note">Bars = calories eaten. Blue line = actual daily burn (Garmin). Bar sitting below the line = that day's deficit.</div>
+        <div class="chartbox" style="height:210px"><canvas id="cchart" height="0" style="display: block; box-sizing: border-box; height: 0px; width: 0px;" width="0"></canvas></div>
+      </div>
+      <div class="card">
+        <h3>Macro grams by day</h3>
+        <div class="note">Protein, fat, carbs side by side.</div>
+        <div class="chartbox" style="height:210px"><canvas id="mchart" height="0" style="display: block; box-sizing: border-box; height: 0px; width: 0px;" width="0"></canvas></div>
+      </div>
+    </div>
+  </section>
+  <section class="panel" id="meals">
+    <nav class="wnav">
+      <button class="wtab" data-w="mw1">Week 1 · 15–21 Jun</button>
+      <button class="wtab on" data-w="mw2">Week 2 · 22–28 Jun</button>
+    </nav>
+    <div class="wpanel" id="mw1">
+      <div class="card">
+        <h3>Logged meals · Week 1</h3>
+        <div class="note">Protein and calories per item. Coral figure is protein.</div>
+        <div class="meals" id="mealList-w1"><div class="day-h">Tuesday 16 Jun</div><div class="meal"><div class="nm"><div class="t">Breakfast</div><div class="s">Salmon, eggs, avocado on muffin</div></div>
+     <div class="p">44g</div><div class="cal">690 cal</div></div><div class="meal"><div class="nm"><div class="t">Lunch</div><div class="s">Chicken-mayo + roast-veg sandwiches, potato salad</div></div>
+     <div class="p">37g</div><div class="cal">795 cal</div></div><div class="meal"><div class="nm"><div class="t">Dinner</div><div class="s">Roasted beef fillet, dauphinoise, asparagus</div></div>
+     <div class="p">47g</div><div class="cal">620 cal</div></div><div class="meal"><div class="nm"><div class="t">Drink</div><div class="s">Peroni Nastro Azzurro 0.0</div></div>
+     <div class="p">1g</div><div class="cal">50 cal</div></div><div class="day-h">Wednesday 17 Jun</div><div class="meal"><div class="nm"><div class="t">Breakfast</div><div class="s">Salmon, 4 poached eggs, avocado bagel</div></div>
+     <div class="p">54g</div><div class="cal">780 cal</div></div><div class="meal"><div class="nm"><div class="t">Lunch</div><div class="s">Chermoula chicken skewers (2), kale caesar, pita (grapes left)</div></div>
+     <div class="p">46g</div><div class="cal">675 cal</div></div><div class="meal"><div class="nm"><div class="t">Coffee</div><div class="s">Piccolo, full-cream milk</div></div>
+     <div class="p">2g</div><div class="cal">30 cal</div></div><div class="meal"><div class="nm"><div class="t">Coffee</div><div class="s">Piccolo, full-cream milk (2nd, larger)</div></div>
+     <div class="p">4g</div><div class="cal">60 cal</div></div><div class="meal"><div class="nm"><div class="t">Dinner</div><div class="s">Chicken Rappa wrap, double chicken, mayo</div></div>
+     <div class="p">42g</div><div class="cal">810 cal</div></div><div class="meal"><div class="nm"><div class="t">Dessert</div><div class="s">Homemade protein ice cream — WPI (1 of 3 serves)</div></div>
+     <div class="p">25g</div><div class="cal">165 cal</div></div><div class="day-h">Thursday 18 Jun</div><div class="meal"><div class="nm"><div class="t">Breakfast</div><div class="s">Overnight oats bowl, no PB — oats, VPA, chia, flax, EOSS passionfruit yoghurt, berries, mixed nuts</div></div>
+     <div class="p">45g</div><div class="cal">585 cal</div></div><div class="meal"><div class="nm"><div class="t">Coffee</div><div class="s">Espresso, single shot black — pre-session</div></div>
+     <div class="p">0g</div><div class="cal">2 cal</div></div><div class="meal"><div class="nm"><div class="t">Ride fuel</div><div class="s">50 g glucose + electrolytes — during Sweet Spot</div></div>
+     <div class="p">0g</div><div class="cal">200 cal</div></div><div class="meal"><div class="nm"><div class="t">Shake</div><div class="s">Protein shake — 1 scoop VPA with water</div></div>
+     <div class="p">26g</div><div class="cal">115 cal</div></div><div class="meal"><div class="nm"><div class="t">Pre-workout</div><div class="s">Grilled salmon (87 g) + brown rice (70 g)</div></div>
+     <div class="p">23g</div><div class="cal">275 cal</div></div><div class="meal"><div class="nm"><div class="t">Espresso</div><div class="s">Single shot, black</div></div>
+     <div class="p">0g</div><div class="cal">2 cal</div></div><div class="meal"><div class="nm"><div class="t">Snack</div><div class="s">Overnight oats #2 — yoghurt, berries (no nuts/PB)</div></div>
+     <div class="p">41g</div><div class="cal">475 cal</div></div><div class="meal"><div class="nm"><div class="t">Dinner</div><div class="s">Chicken souvlaki (2 skewers), grilled pita, red cabbage slaw — no chips</div></div>
+     <div class="p">55g</div><div class="cal">675 cal</div></div><div class="meal"><div class="nm"><div class="t">Dessert</div><div class="s">Homemade protein ice cream — WPI (1 serve)</div></div>
+     <div class="p">25g</div><div class="cal">165 cal</div></div><div class="day-h">Friday 19 Jun</div><div class="meal"><div class="nm"><div class="t">Breakfast</div><div class="s">Overnight oats bowl — oats, VPA, chia, flax, EOSS passionfruit yoghurt, berries, mixed nuts</div></div>
+     <div class="p">45g</div><div class="cal">585 cal</div></div><div class="meal"><div class="nm"><div class="t">Coffee</div><div class="s">Espresso, single shot black — with breakfast</div></div>
+     <div class="p">0g</div><div class="cal">2 cal</div></div><div class="meal"><div class="nm"><div class="t">Post-ride</div><div class="s">Recovery smoothie — 2 scoops VPA, A2 full-cream milk, ½ frozen banana</div></div>
+     <div class="p">61g</div><div class="cal">460 cal</div></div><div class="meal"><div class="nm"><div class="t">Coffee</div><div class="s">Piccolo, full-cream milk</div></div>
+     <div class="p">2g</div><div class="cal">30 cal</div></div><div class="meal"><div class="nm"><div class="t">Dinner</div><div class="s">Charcoal chicken (2 pieces, skin off), chips, beetroot, garden salad</div></div>
+     <div class="p">56g</div><div class="cal">825 cal</div></div><div class="meal"><div class="nm"><div class="t">Dinner +</div><div class="s">Second helping — chicken (drumstick + breast), beetroot, salad</div></div>
+     <div class="p">35g</div><div class="cal">385 cal</div></div><div class="meal"><div class="nm"><div class="t">Dessert</div><div class="s">Homemade protein ice cream — WPI (1 serve)</div></div>
+     <div class="p">25g</div><div class="cal">165 cal</div></div><div class="day-h">Saturday 20 Jun</div><div class="meal"><div class="nm"><div class="t">Breakfast</div><div class="s">Overnight oats base (oats, VPA, chia, flax — no milk), Farmers Union hi-pro yoghurt, ½ banana, nut &amp; seed mix</div></div>
+     <div class="p">45g</div><div class="cal">615 cal</div></div><div class="meal"><div class="nm"><div class="t">Coffee</div><div class="s">2 × espresso, black</div></div>
+     <div class="p">0g</div><div class="cal">4 cal</div></div><div class="meal"><div class="nm"><div class="t">Post-legs</div><div class="s">Protein shake — 2 scoops VPA (water)</div></div>
+     <div class="p">52g</div><div class="cal">230 cal</div></div><div class="meal"><div class="nm"><div class="t">Brunch</div><div class="s">Chilli scrambled eggs (ham, tomato, fried shallots) + 1 roti</div></div>
+     <div class="p">29g</div><div class="cal">590 cal</div></div><div class="meal"><div class="nm"><div class="t">Coffee</div><div class="s">Piccolo, full-cream milk</div></div>
+     <div class="p">2g</div><div class="cal">30 cal</div></div><div class="meal"><div class="nm"><div class="t">Dinner</div><div class="s">BBQ roast chicken (skin off), garden salad, chips (~85g)</div></div>
+     <div class="p">51g</div><div class="cal">645 cal</div></div><div class="meal"><div class="nm"><div class="t">Dessert</div><div class="s">Homemade protein ice cream — peanut butter (1 serve)</div></div>
+     <div class="p">26g</div><div class="cal">176 cal</div></div><div class="day-h">Sunday 21 Jun</div><div class="meal"><div class="nm"><div class="t">Breakfast</div><div class="s">Overnight oats (oats, VPA, chia, flax — no milk), Farmers Union hi-pro yoghurt (1 tbsp less), ½ banana, nut &amp; seed mix</div></div>
+     <div class="p">43g</div><div class="cal">605 cal</div></div><div class="meal"><div class="nm"><div class="t">Ride fuel</div><div class="s">2 × 100 g glucose:fructose bottles + plain water + electrolytes — on the bike</div></div>
+     <div class="p">0g</div><div class="cal">800 cal</div></div><div class="meal"><div class="nm"><div class="t">Post-ride</div><div class="s">Recovery shake — 1 scoop VPA (water)</div></div>
+     <div class="p">26g</div><div class="cal">115 cal</div></div><div class="meal"><div class="nm"><div class="t">Lunch</div><div class="s">Misuzu's oyako don — ½ share (karaage-style chicken, egg, rice)</div></div>
+     <div class="p">21g</div><div class="cal">385 cal</div></div><div class="meal"><div class="nm"><div class="t">Lunch</div><div class="s">Baked scallops — 2 of 4 (cheese-topped)</div></div>
+     <div class="p">11g</div><div class="cal">155 cal</div></div><div class="meal"><div class="nm"><div class="t">Lunch</div><div class="s">Yakitori chicken skewers — ½ share</div></div>
+     <div class="p">12g</div><div class="cal">120 cal</div></div><div class="meal"><div class="nm"><div class="t">Lunch</div><div class="s">Chicken gyoza — ½ share</div></div>
+     <div class="p">7g</div><div class="cal">140 cal</div></div><div class="meal"><div class="nm"><div class="t">Lunch</div><div class="s">Kaiso seaweed salad — ½ share</div></div>
+     <div class="p">2g</div><div class="cal">50 cal</div></div><div class="meal"><div class="nm"><div class="t">Dinner</div><div class="s">BBQ chicken (¼ breast + 1 drumstick, skin off), coleslaw (mayo, modest), chips 100g</div></div>
+     <div class="p">29g</div><div class="cal">560 cal</div></div><div class="meal"><div class="nm"><div class="t">Dessert</div><div class="s">Homemade protein ice cream — peanut butter (1 serve)</div></div>
+     <div class="p">26g</div><div class="cal">176 cal</div></div></div>
+      </div>
+    </div>
+    <div class="wpanel on" id="mw2">
+      <div class="card">
+        <h3>Logged meals · Week 2</h3>
+        <div class="note">Protein and calories per item. Coral figure is protein.</div>
+        <div class="meals" id="mealList-w2"><div class="day-h">Monday 22 Jun</div><div class="meal"><div class="nm"><div class="t">Coffee</div><div class="s">Espresso, single shot black — pre-ride, fasted</div></div>
+     <div class="p">0g</div><div class="cal">2 cal</div></div><div class="meal"><div class="nm"><div class="t">Post-ride</div><div class="s">Recovery smoothie — 2 scoops VPA, ½ banana, ½ cup blueberries, ½ cup Chobani Greek yoghurt, water</div></div>
+     <div class="p">65g</div><div class="cal">395 cal</div></div></div>
+      </div>
+    </div>
+  </section>
+  <section class="panel" id="recomp">
+    <div class="card" style="margin-bottom:15px;border-left:3px solid var(--coral)">
+      <h3>Weekly deficit <span style="font-size:12px;color:var(--t3);font-weight:400">· week closed</span></h3>
+      <div class="note">Sum of each day's net (eaten − Garmin burn) across the week — the number that actually moves the scale. Week of Mon 15 – Sun 21 Jun.</div>
+      <div class="stat">
+        <div class="s"><div class="k">Week total</div><div class="v" style="color:#74c490">−1,910<small style="font-size:12px;color:var(--t3)"> cal</small></div><div class="d">Tue–Sun · final</div></div>
+        <div class="s"><div class="k">Predicted loss</div><div class="v" style="color:#74c490">~0.25<small style="font-size:12px;color:var(--t3)"> kg</small></div><div class="d">deficit ÷ 7700</div></div>
+        <div class="s"><div class="k">Days logged</div><div class="v">6<small style="font-size:12px;color:var(--t3)"> / 7</small></div><div class="d">Mon n/a · week closed</div></div>
+        <div class="s"><div class="k">Avg / day</div><div class="v" style="color:#74c490">−318<small style="font-size:12px;color:var(--t3)"> cal</small></div><div class="d">~0.29 kg/wk pace</div></div>
+      </div>
+      <div class="insight" style="border-left-color:#74c490"><b>Week 1 closed — on target.</b> Six logged days ran to <b>−1,910</b> (≈0.25 kg), averaging −318/day — almost exactly the ~300 you're aiming for. The shape is healthy: the deeper deficits came off the bike on the high-burn days, not from under-eating, and protein cleared 150 on five of the six days. Monday wasn't tracked, so the true week was likely a little deeper still. Tracking resumes Tuesday — from next week this card also shows vs the prior week.</div>
+    </div>
+    <div class="card" style="margin-bottom:15px">
+      <h3>Baseline — 17 Jun</h3>
+      <div class="note">The scale holds ~flat by design. Progress shows here: waist down, lifts up.</div>
+      <div class="recomp">
+        <div class="rc"><div class="k">Weight</div><div class="v">75<small style="font-size:13px;color:var(--t3)"> kg</small></div><div class="d">hold steady</div></div>
+        <div class="rc"><div class="k">Waist</div><div class="v">75<small style="font-size:13px;color:var(--t3)"> cm</small></div><div class="d">30" · lean start</div></div>
+        <div class="rc"><div class="k">Bench top set</div><div class="v">75<small style="font-size:13px;color:var(--t3)"> kg</small></div><div class="d">building</div></div>
+        <div class="rc"><div class="k">Cable row top</div><div class="v">95<small style="font-size:13px;color:var(--t3)"> kg</small></div><div class="d">recent PB</div></div>
+      </div>
+      <div class="insight"><b>How to read recomp:</b> at 75 cm / 30" you're already lean, so change will be gradual — even 1–2 cm off the waist over a couple of months, while the scale holds ~75 kg and bench/row/RDL climb, means it's working. Judge it monthly, not daily.</div>
+    </div>
+  </section>
+  <section class="panel" id="training">
+    <nav class="wnav">
+      <button class="wtab" data-w="w1">Week 1 · 15–21 Jun</button>
+      <button class="wtab on" data-w="w2">Week 2 · 22–28 Jun</button>
+    </nav>
+    <div class="wpanel" id="w1">
+    <div class="card" style="margin-bottom:15px;border-left:3px solid var(--coral)">
+      <h3>Today's ride — Sun 21 Jun</h3>
+      <div class="note">Long endurance · 90.4 km to Frankston · 3h 03m moving · from Strava.</div>
+      <div class="stat" style="grid-template-columns:repeat(4,1fr)">
+        <div class="s"><div class="k">Distance</div><div class="v">90.4<small style="font-size:12px;color:var(--t3)"> km</small></div><div class="d">240 m climbing</div></div>
+        <div class="s"><div class="k">Avg power</div><div class="v">144<small style="font-size:12px;color:var(--t3)"> W</small></div><div class="d">~59% FTP · Z2 endurance</div></div>
+        <div class="s"><div class="k">Avg HR</div><div class="v">144<small style="font-size:12px;color:var(--t3)"> bpm</small></div><div class="d">aerobic · max 173</div></div>
+        <div class="s"><div class="k">Cadence</div><div class="v">87<small style="font-size:12px;color:var(--t3)"> rpm</small></div><div class="d">1,813 ride cal · 3 PRs</div></div>
+      </div>
+      <div class="insight" style="margin-top:14px">Solid long ride — 144 W held over three hours at an aerobic HR is exactly the Z2 endurance stimulus the block wants, and 3 PRs along the way. Relative effort 140. Fuelling was on point: 200 g carbs across two bottles (~65 g/hr) plus a plain-water bottle and electrolytes, dialled for a ride this long. Recovery shake in; protein into dinner now to refill glycogen and reach 150 g.</div>
+    </div>
+    <div class="card" style="margin-bottom:15px;border-left:3px solid var(--coral)">
+      <h3>Yesterday — Sat 20 Jun · Legs</h3>
+      <div class="note">Legs · logged via Hevy · 36 min · green-light day, full session + extra.</div>
+      <div class="stat" style="grid-template-columns:repeat(4,1fr)">
+        <div class="s"><div class="k">RDL top set</div><div class="v">75<small style="font-size:12px;color:var(--t3)"> kg</small></div><div class="d">× 10 — PB 🎯</div></div>
+        <div class="s"><div class="k">Split squat</div><div class="v">25<small style="font-size:12px;color:var(--t3)"> kg</small></div><div class="d">× 10/side · 3 sets</div></div>
+        <div class="s"><div class="k">Leg curl</div><div class="v">57.5<small style="font-size:12px;color:var(--t3)"> kg</small></div><div class="d">× 12 · progressed</div></div>
+        <div class="s"><div class="k">Volume</div><div class="v">5<small style="font-size:12px;color:var(--t3)"> lifts</small></div><div class="d">extra sets added</div></div>
+      </div>
+      <div class="insight" style="margin-top:14px">Did <b>more</b> than the plan, not less — RDL ramped to 75 kg × 10, well past the 60 kg target and a working PB, plus extra sets on extensions and curls. The 36 min is just tight 30–60s rest, not a cut session. Heavy leg load the day before a long ride, so fuel carbs into tonight; legs may feel it early tomorrow but Z2 will spin it out.</div>
+    </div>
+    <div class="card" style="margin-bottom:15px;border-left:3px solid var(--coral)">
+      <h3>Yesterday — Fri 19 Jun</h3>
+      <div class="note">Easy Z2 · Albert Park laps · the amber-day call, kept honest.</div>
+      <div class="stat" style="grid-template-columns:repeat(4,1fr)">
+        <div class="s"><div class="k">Distance</div><div class="v">31<small style="font-size:12px;color:var(--t3)"> km</small></div><div class="d">64 min moving</div></div>
+        <div class="s"><div class="k">Avg power</div><div class="v">141<small style="font-size:12px;color:var(--t3)"> W</small></div><div class="d">~58% FTP · true Z2</div></div>
+        <div class="s"><div class="k">Avg HR</div><div class="v">138<small style="font-size:12px;color:var(--t3)"> bpm</small></div><div class="d">aerobic · max 160</div></div>
+        <div class="s"><div class="k">Cadence</div><div class="v">90<small style="font-size:12px;color:var(--t3)"> rpm</small></div><div class="d">630 cal active</div></div>
+      </div>
+      <div class="insight" style="margin-top:14px">Exactly right for an amber morning — 141 W is ~58% of FTP and HR stayed aerobic, so this is genuinely restorative, not a Z3 drift. Good discipline. Watered &amp; refuelled after with a 60 g-protein smoothie. Tomorrow's readout decides the long ride.</div>
+    </div>
+    <div class="card" style="margin-bottom:15px;border-left:3px solid var(--coral)">
+      <h3>Thu 18 Jun · AM</h3>
+      <div class="note">Sweet Spot 4×8 · FTP-block opener · on the trainer.</div>
+      <div class="stat" style="grid-template-columns:repeat(4,1fr)">
+        <div class="s"><div class="k">Target</div><div class="v">235<small style="font-size:12px;color:var(--t3)">–245 W</small></div><div class="d">sweet spot</div></div>
+        <div class="s"><div class="k">Completed</div><div class="v">3.25<small style="font-size:12px;color:var(--t3)"> / 4</small></div><div class="d">3 full + 2 min</div></div>
+        <div class="s"><div class="k">Time at SS</div><div class="v">~26<small style="font-size:12px;color:var(--t3)"> min</small></div><div class="d">of 32 target</div></div>
+        <div class="s"><div class="k">Fuel</div><div class="v">50<small style="font-size:12px;color:var(--t3)"> g</small></div><div class="d">carbs intra-ride</div></div>
+      </div>
+      <div class="insight" style="margin-top:14px">Brutal final interval — faded to 2 of 8 min. Normal for an opener; the work banked still drives the adaptation. Next time, pace the first three a touch easier or fuel slightly earlier to chase the full set.</div>
+    </div>
+    <div class="card" style="margin-bottom:15px;border-left:3px solid var(--coral)">
+      <h3>Thu 18 Jun · PM — Chest &amp; shoulders</h3>
+      <div class="note">Weights session · logged via Hevy · ~46 min · the recommended PM block.</div>
+      <div class="stat" style="grid-template-columns:repeat(4,1fr)">
+        <div class="s"><div class="k">Bench top set</div><div class="v">77.5<small style="font-size:12px;color:var(--t3)"> kg</small></div><div class="d">× 6 — new PB 🎯</div></div>
+        <div class="s"><div class="k">Incline DB</div><div class="v">50<small style="font-size:12px;color:var(--t3)"> kg</small></div><div class="d">× 10 · total</div></div>
+        <div class="s"><div class="k">OH press DB</div><div class="v">25<small style="font-size:12px;color:var(--t3)"> kg</small></div><div class="d">× 10 · total</div></div>
+        <div class="s"><div class="k">Volume</div><div class="v">5<small style="font-size:12px;color:var(--t3)"> lifts</small></div><div class="d">+ lat raise, wrist</div></div>
+      </div>
+      <div class="insight" style="margin-top:14px">Bench 77.5 kg × 6 clears your 75 kg mark — strength is trending up. Back-off sets at 67.5 × 10 banked quality volume. Paired with this morning's Sweet Spot that's a real double day, so protein and sleep tonight are the priority for recovery.</div>
+    </div>
+    <div class="card" style="margin-bottom:15px">
+      <h3>Where your fitness sits</h3>
+      <div class="note">Headline markers from Strava + the gym.</div>
+      <div class="stat">
+        <div class="s"><div class="k">FTP</div><div class="v">243<small style="font-size:12px;color:var(--t3)"> W</small></div><div class="d">3.24 W/kg · 6-wk est · 257 '26 high · 275 goal</div></div>
+        <div class="s"><div class="k">VO₂ max</div><div class="v">49.6</div><div class="d">peak 51.6 · strong</div></div>
+        <div class="s"><div class="k">Cable row</div><div class="v">95<small style="font-size:12px;color:var(--t3)"> kg</small></div><div class="d">recent PB</div></div>
+        <div class="s"><div class="k">Bench</div><div class="v">77.5<small style="font-size:12px;color:var(--t3)"> kg</small></div><div class="d">× 6 · new PB</div></div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:15px">
+      <h3>Energy balance — day-matched</h3>
+      <div class="note">Eaten vs Garmin actual burn, same day, for the 5 logged days (16–20 Jun). Your 4-week typical burn is 2,741/day for reference.</div>
+      <div class="stat">
+        <div class="s"><div class="k">Avg eaten</div><div class="v">2,382<small style="font-size:12px;color:var(--t3)"> cal</small></div><div class="d">5 days</div></div>
+        <div class="s"><div class="k">Avg burned</div><div class="v">2,647<small style="font-size:12px;color:var(--t3)"> cal</small></div><div class="d">Garmin actual</div></div>
+        <div class="s"><div class="k">Avg net</div><div class="v" style="color:#74c490">−265<small style="font-size:12px;color:var(--t3)"> cal</small></div><div class="d">day-matched</div></div>
+        <div class="s"><div class="k">Per week</div><div class="v" style="color:#74c490">~0.24<small style="font-size:12px;color:var(--t3)"> kg</small></div><div class="d">in the cut</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px">
+        <div style="background:var(--raised);border:1px solid var(--border);border-radius:11px;padding:10px 10px">
+          <div style="font-family:var(--m);font-size:10px;letter-spacing:.03em;text-transform:uppercase;color:var(--coral)">Tue</div>
+          <div style="font-size:10.5px;color:var(--t2);margin-top:5px">2155·2450</div>
+          <div style="font-family:var(--d);font-weight:600;font-size:16px;color:var(--sky);margin-top:2px">−295</div>
+        </div>
+        <div style="background:var(--raised);border:1px solid var(--border);border-radius:11px;padding:10px 10px">
+          <div style="font-family:var(--m);font-size:10px;letter-spacing:.03em;text-transform:uppercase;color:var(--coral)">Wed</div>
+          <div style="font-size:10.5px;color:var(--t2);margin-top:5px">2520·2614</div>
+          <div style="font-family:var(--d);font-weight:600;font-size:16px;color:var(--sky);margin-top:2px">−94</div>
+        </div>
+        <div style="background:var(--raised);border:1px solid var(--border);border-radius:11px;padding:10px 10px">
+          <div style="font-family:var(--m);font-size:10px;letter-spacing:.03em;text-transform:uppercase;color:var(--coral)">Thu</div>
+          <div style="font-size:10.5px;color:var(--t2);margin-top:5px">2495·3033</div>
+          <div style="font-family:var(--d);font-weight:600;font-size:16px;color:var(--sky);margin-top:2px">−538</div>
+        </div>
+        <div style="background:var(--raised);border:1px solid var(--border);border-radius:11px;padding:10px 10px">
+          <div style="font-family:var(--m);font-size:10px;letter-spacing:.03em;text-transform:uppercase;color:var(--coral)">Fri</div>
+          <div style="font-size:10.5px;color:var(--t2);margin-top:5px">2450·2797</div>
+          <div style="font-family:var(--d);font-weight:600;font-size:16px;color:var(--sky);margin-top:2px">−347</div>
+        </div>
+        <div style="background:var(--raised);border:1px solid var(--border);border-radius:11px;padding:10px 10px">
+          <div style="font-family:var(--m);font-size:10px;letter-spacing:.03em;text-transform:uppercase;color:var(--coral)">Sat</div>
+          <div style="font-size:10.5px;color:var(--t2);margin-top:5px">2290·2342</div>
+          <div style="font-family:var(--d);font-weight:600;font-size:16px;color:var(--sky);margin-top:2px">−52</div>
+        </div>
+      </div>
+      <div style="margin-top:14px">
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--t3);font-family:var(--m);margin-bottom:5px"><span>EATEN 2,382</span><span>BURNED 2,647</span></div>
+        <div class="track" style="height:14px"><i style="width:90%;background:linear-gradient(90deg,var(--coral),var(--orange))"></i></div>
+      </div>
+      <div class="insight" style="margin-top:14px;border-left-color:#74c490"><b>Five days, in the cut.</b> The run is −295, −94, −538, −347, −52 — average −265/day (~0.24 kg/week). Saturday's −52 was a deliberate near-maintenance top-up the night before the long ride, which is why the average eased back from −300. The pattern's healthy: deficits run deeper on big-burn days. Thursday's −538 (double session) is the standout. Today's ride day will pull the average back down. Weigh in to confirm.</div>
+    </div>
+    <div class="card" style="margin-bottom:15px">
+      <h3>HRV — this week's readiness</h3>
+      <div class="note">Overnight HRV (left axis) and resting HR (right) vs your green floor (38 ms) and red line (36 ms). The deficit's safety check — a multi-day slide in both is the cue to add fuel.</div>
+      <div class="stat" style="grid-template-columns:repeat(4,1fr)">
+        <div class="s"><div class="k">7-day avg</div><div class="v">40<small style="font-size:12px;color:var(--t3)"> ms</small></div><div class="d">above ~39 baseline</div></div>
+        <div class="s"><div class="k">Latest</div><div class="v" style="color:#74c490">44<small style="font-size:12px;color:var(--t3)"> ms</small></div><div class="d">Sun · week's best</div></div>
+        <div class="s"><div class="k">Resting HR</div><div class="v" style="color:#74c490">55<small style="font-size:12px;color:var(--t3)"> bpm</small></div><div class="d">lowest this week</div></div>
+        <div class="s"><div class="k">Status</div><div class="v" style="color:#74c490">Green</div><div class="d">cleared the ride</div></div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;margin:6px 0 4px;font-size:12px;color:var(--t2)">
+        <span><span style="width:14px;height:2px;background:var(--sky);display:inline-block;vertical-align:middle"></span> HRV</span>
+        <span><span style="width:14px;height:2px;background:var(--violet);display:inline-block;vertical-align:middle"></span> Resting HR</span>
+        <span><span style="width:14px;height:2px;background:var(--gold);display:inline-block;vertical-align:middle"></span> Green floor 38</span>
+        <span><span style="width:14px;height:2px;background:var(--coral);display:inline-block;vertical-align:middle"></span> Red line 36</span>
+      </div>
+      <div class="chartbox" style="height:200px"><canvas id="hrv"></canvas></div>
+      <div class="insight" style="margin-top:14px;border-left-color:#74c490">Best readout of the week landed Sunday morning — HRV up to <b>44</b> (well clear of the 38 floor) and resting HR down to <b>55</b>, its lowest all week. Friday's amber was a one-day blip, fully recovered. That green light is exactly what you want to see before a 90 km day — and you took it. Refuel and sleep tonight so the readout holds into next week.</div>
+    </div>
+    <div class="grid g2">
+      <div class="card">
+        <h3>Recent wins</h3>
+        <div class="note">The standout sessions of the block.</div>
+        <div class="meals">
+          <div class="meal"><div class="nm"><div class="t">90 km Frankston long ride</div><div class="s">3h 03m · 144 W held · 3 PRs · fuel dialled</div></div><div class="p">★</div></div>
+          <div class="meal"><div class="nm"><div class="t">Bench 77.5 kg × 6</div><div class="s">New PB — up from 75 · today's chest session</div></div><div class="p">PB</div></div>
+          <div class="meal"><div class="nm"><div class="t">Cable row 95 kg × 6</div><div class="s">New PB — up from 90 × 12</div></div><div class="p">PB</div></div>
+          <div class="meal"><div class="nm"><div class="t">70 km solo, finished strong</div><div class="s">89 rpm held to the end · fuel dialled</div></div><div class="p">✓</div></div>
+          <div class="meal"><div class="nm"><div class="t">Best week — late April</div><div class="s">230 km + relative effort 351</div></div><div class="p">★</div></div>
+          <div class="meal"><div class="nm"><div class="t">RDL 75 kg × 10</div><div class="s">New working PB — up from 60 · today's legs session</div></div><div class="p">PB</div></div>
+          <div class="meal"><div class="nm"><div class="t">Sweet Spot 4×8 debut — done</div><div class="s">3 full + 2 min of the 4th · brutal finish, fuelled 50 g carbs</div></div><div class="p">✓</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Power records</h3>
+        <div class="note">Best-ever watts by duration.</div>
+        <div class="chartbox" style="height:210px"><canvas id="power"></canvas></div>
+      </div>
+    </div>
+    <div class="insight" style="margin-top:15px"><b>The thread:</b> ~1,330 km ridden since mid-April, HRV up to 44 (week's best) and resting HR down to 55 — you closed the block's first big endurance day fresh and recovering well, with the row and bench PBs showing the heavy top-set approach is biting.</div>
+    </div>
+    <div class="wpanel on" id="w2">
+    <div class="card" style="margin-bottom:15px;border-left:3px solid #74c490">
+      <h3>Monday readiness — 22 Jun</h3>
+      <div class="note">Overnight HRV &amp; resting HR · first reading of the week, the green light for today.</div>
+      <div class="stat" style="grid-template-columns:repeat(4,1fr)">
+        <div class="s"><div class="k">HRV</div><div class="v" style="color:#74c490">43<small style="font-size:12px;color:var(--t3)"> ms</small></div><div class="d">above 38 floor · green</div></div>
+        <div class="s"><div class="k">Resting HR</div><div class="v">57<small style="font-size:12px;color:var(--t3)"> bpm</small></div><div class="d">slight next-day lift</div></div>
+        <div class="s"><div class="k">Status</div><div class="v" style="color:#74c490">Green</div><div class="d">train as planned</div></div>
+        <div class="s"><div class="k">Today</div><div class="v">Chest</div><div class="d">+ APL Z2 60 min</div></div>
+      </div>
+      <div class="insight" style="margin-top:14px;border-left-color:#74c490">HRV held at <b>43</b> — clear of the 38 floor — after Sunday's 90 km, and resting HR ticked up to 57, the normal day-after-a-long-ride lift, nothing to read into. <b>Green light:</b> run Monday as planned — easy APL spin and chest. Swapping legs to Wednesday gives the ride fatigue another day to clear.</div>
+    </div>
+    <div class="card" style="margin-bottom:15px;border-left:3px solid var(--coral)">
+      <h3>Today's ride — Mon 22 Jun</h3>
+      <div class="note">Fasted easy Z2 · Albert Park Lake laps · 1h 05m · from Strava.</div>
+      <div class="stat" style="grid-template-columns:repeat(4,1fr)">
+        <div class="s"><div class="k">Distance</div><div class="v">31<small style="font-size:12px;color:var(--t3)"> km</small></div><div class="d">36 m climbing</div></div>
+        <div class="s"><div class="k">Avg speed</div><div class="v">28.7<small style="font-size:12px;color:var(--t3)"> km/h</small></div><div class="d">max 35.7 km/h</div></div>
+        <div class="s"><div class="k">Cadence</div><div class="v">87<small style="font-size:12px;color:var(--t3)"> rpm</small></div><div class="d">623 cal (Strava)</div></div>
+        <div class="s"><div class="k">Effort</div><div class="v">16<small style="font-size:12px;color:var(--t3)"> RE</small></div><div class="d">fasted · recovery pace</div></div>
+      </div>
+      <div class="insight" style="margin-top:14px">Easy fasted laps — exactly what a day-after-90 km looks like. Relative effort 16 confirms this was genuine recovery, not a Z2 that drifted up. Smart call after Saturday's legs and Sunday's long ride. The 65 g protein smoothie went in straight after to start refuelling. Chest this afternoon.</div>
+    </div>
+    <div class="card" style="margin-bottom:15px;border-left:3px solid var(--gold)">
+      <h3>The plan — 22–28 Jun</h3>
+      <div class="note">Strength Mon/Wed/Fri PM · APL Monday, endurance Tuesday, Sweet Spot Thursday · Friday lift then travel · weekend rides on the Peninsula. Sessions in Google Calendar with suggested loads.</div>
+      <div class="meals">
+        <div class="meal"><div class="nm"><div class="t">Mon 22 · 🚴 APL Z2 (60 min) + 🏋️ Chest PM</div><div class="s">upper body — legs still recovering from Sat legs + Sun ride</div></div><div class="p">2×</div></div>
+        <div class="meal"><div class="nm"><div class="t">Tue 23 · 🚴 Z2 endurance ride (90 min)</div><div class="s">steady aerobic, outdoor</div></div><div class="p">BIKE</div></div>
+        <div class="meal"><div class="nm"><div class="t">Wed 24 · 🏋️ Legs PM</div><div class="s">legs midweek — 3 clear days to recover before the Peninsula</div></div><div class="p">GYM</div></div>
+        <div class="meal"><div class="nm"><div class="t">Thu 25 · 🚴 Sweet Spot 4×8 (trainer, PM)</div><div class="s">busy work day — contained quality session</div></div><div class="p">FTP</div></div>
+        <div class="meal"><div class="nm"><div class="t">Fri 26 · 🏋️ Back PM, then travel</div><div class="s">upper body — won't touch the weekend's legs · drive to Blairgowrie</div></div><div class="p">GYM</div></div>
+        <div class="meal"><div class="nm"><div class="t">Sat 27 · 🚴 Long endurance, Peninsula (2.5–3h)</div><div class="s">Two Bays / coastal — the week's long ride</div></div><div class="p">BIKE</div></div>
+        <div class="meal"><div class="nm"><div class="t">Sun 28 · 🚴 Hilly Z2, Arthurs Seat (1.5–2h)</div><div class="s">climb touch, then drive home</div></div><div class="p">BIKE</div></div>
+      </div>
+      <div class="insight" style="margin-top:14px;border-left-color:var(--gold)"><b>The shape:</b> Chest leads off Monday since legs are still recovering from Saturday's session and Sunday's 90 km; legs move to Wednesday, with three clear days before the Peninsula weekend. Friday's Back is upper-body, so it won't cost you for Saturday. No full rest day this week — keep Monday and Tuesday genuinely easy and treat Sunday as flexible (cut it short if the legs are cooked). Key lifts: bench 77.5 kg × 5–6, RDL 75 kg × 8–10, cable row 95 kg × 6–8 — full loads in the calendar.</div>
+    </div>
+    </div>
+  </section>
+  <section class="panel" id="bloods">
+    <div class="card" style="margin-bottom:15px">
+      <h3>Latest panel — 18 Mar 2026</h3>
+      <div class="note">Values against the lab's reference ranges. Everything below is within range.</div>
+      <div class="stat" style="grid-template-columns:repeat(3,1fr)">
+        <div class="s"><div class="k">Cholesterol</div><div class="v">3.8</div><div class="d">&lt; 5.6 · in range</div></div>
+        <div class="s"><div class="k">LDL-c</div><div class="v">2.1</div><div class="d">&lt; 3.1 · in range</div></div>
+        <div class="s"><div class="k">HDL-c</div><div class="v">1.3</div><div class="d">&gt; 0.9 · in range</div></div>
+        <div class="s"><div class="k">Triglycerides</div><div class="v">0.9</div><div class="d">&lt; 2.1 · in range</div></div>
+        <div class="s"><div class="k">Fasting glucose</div><div class="v">4.6</div><div class="d">3.0–5.4 · in range</div></div>
+        <div class="s"><div class="k">Vitamin D</div><div class="v">123</div><div class="d">50–200 · in range</div></div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:15px">
+      <h3>Lipids — the year's story</h3>
+      <div class="note">Cholesterol and LDL came down sharply from Apr 2025 into range; HDL nudged up. Dashed line is the cholesterol upper limit.</div>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;margin-bottom:10px;font-size:12px;color:var(--t2)">
+        <span><span style="width:14px;height:2px;background:var(--coral);display:inline-block;vertical-align:middle"></span> Cholesterol</span>
+        <span><span style="width:14px;height:2px;background:var(--violet);display:inline-block;vertical-align:middle"></span> LDL-c</span>
+        <span><span style="width:14px;height:2px;background:var(--gold);display:inline-block;vertical-align:middle"></span> HDL-c</span>
+        <span><span style="width:14px;height:2px;background:var(--pink);display:inline-block;vertical-align:middle"></span> Triglycerides</span>
+      </div>
+      <div class="chartbox" style="height:250px"><canvas id="lipid" height="0" style="display: block; box-sizing: border-box; height: 0px; width: 0px;" width="0"></canvas></div>
+    </div>
+    <div class="grid g2">
+      <div class="card">
+        <h3>Fasting glucose</h3>
+        <div class="note">Down from 5.7 (2023) to 4.6 — now comfortably in range.</div>
+        <div class="chartbox" style="height:200px"><canvas id="gluc"></canvas></div>
+      </div>
+      <div class="card">
+        <h3>Other markers — 18 Mar</h3>
+        <div class="note">All within range. Current reading only — add past results to trend these.</div>
+        <table style="width:100%;border-collapse:collapse">
+          <tbody>
+            <tr><td style="padding:6px 0;color:var(--t2)">Haemoglobin</td><td style="text-align:right;font-family:var(--m)">159 <span style="color:var(--t3)">(130–180)</span></td></tr>
+            <tr><td style="padding:6px 0;color:var(--t2);border-top:1px solid var(--border)">eGFR (kidney)</td><td style="text-align:right;font-family:var(--m);border-top:1px solid var(--border)">82 <span style="color:var(--t3)">(&gt;59)</span></td></tr>
+            <tr><td style="padding:6px 0;color:var(--t2);border-top:1px solid var(--border)">Gamma GT (liver)</td><td style="text-align:right;font-family:var(--m);border-top:1px solid var(--border)">23 <span style="color:var(--t3)">(&lt;51)</span></td></tr>
+            <tr><td style="padding:6px 0;color:var(--t2);border-top:1px solid var(--border)">TSH (thyroid)</td><td style="text-align:right;font-family:var(--m);border-top:1px solid var(--border)">1.23 <span style="color:var(--t3)">(0.55–4.78)</span></td></tr>
+            <tr><td style="padding:6px 0;color:var(--t2);border-top:1px solid var(--border)">Ferritin</td><td style="text-align:right;font-family:var(--m);border-top:1px solid var(--border)">293 <span style="color:var(--t3)">(30–300)</span></td></tr>
+            <tr><td style="padding:6px 0;color:var(--t2);border-top:1px solid var(--border)">Transferrin sat.</td><td style="text-align:right;font-family:var(--m);border-top:1px solid var(--border)">44% <span style="color:var(--t3)">(20–50)</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="insight" style="margin-top:15px"><b>Reading this:</b> the lab flagged nothing high on 18 Mar — lipids, glucose, liver, kidney, thyroid and iron all sit within range, and the lipid panel improved markedly over the year. Ferritin (293) sits near the top of its range. None of this is medical interpretation — take the report to Dr Taylor for what it means and any next steps.</div>
+    <div class="note" style="margin-top:10px">📊 Full marker history lives in <b>Bloods_Tracker.xlsx</b> — each new test slots in as a dated column, with Latest and in-range status updating automatically. These cards mirror its most recent panel.</div>
+  </section>
+  <div class="foot">Food Log + Strava/gym + 4Cyte pathology (18 Mar 2026) · estimates &amp; lab ranges shown · not medical advice</div>
+</div>
+<script>
+const C={coral:'#0e9aa7',orange:'#df8a3c',gold:'#caa53a',pink:'#c2607f',violet:'#7b6cb0',sky:'#3a8fb5',
+  grid:'rgba(20,40,60,0.08)',tick:'#5a6b7a',t3:'#90a0ad',surf:'#ffffff'};
+Chart.defaults.color=C.tick; Chart.defaults.font.family="'IBM Plex Sans',sans-serif"; Chart.defaults.font.size=11;
+const charts={};
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on'));
+  t.classList.add('on'); document.getElementById(t.dataset.p).classList.add('on');
+  Object.values(charts).forEach(c=>c.resize());
+}));
+document.querySelectorAll('.wtab').forEach(t=>t.addEventListener('click',()=>{
+  const sec=t.closest('section');
+  sec.querySelectorAll('.wtab').forEach(x=>x.classList.remove('on'));
+  sec.querySelectorAll('.wpanel').forEach(x=>x.classList.remove('on'));
+  t.classList.add('on'); document.getElementById(t.dataset.w).classList.add('on');
+  Object.values(charts).forEach(c=>c.resize());
+}));
+const noL={legend:{display:false}};
+const gx={grid:{display:false}};
+charts.ring=new Chart(document.getElementById('ring'),{type:'doughnut',data:{
+  labels:['Protein','Fat','Carbs'],
+  datasets:[{data:[65,1,29],backgroundColor:[C.coral,C.orange,C.gold],borderColor:C.surf,borderWidth:3}]},
+  options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{position:'bottom',labels:{padding:13,font:{size:12}}},tooltip:{callbacks:{label:function(c){return c.label+': '+c.raw+' g';}}}}}});
+const days=['Tue 16','Wed 17','Thu 18','Fri 19','Sat 20','Sun 21'];
+charts.p=new Chart(document.getElementById('pchart'),{data:{labels:days,datasets:[
+  {type:'bar',data:[129,173,215,224,205,177],backgroundColor:[C.coral,C.coral,C.coral,C.coral,C.coral,C.coral],borderRadius:6,barPercentage:.55},
+  {type:'line',data:[150,150,150,150,150,150],borderColor:C.gold,borderDash:[6,4],pointRadius:0,borderWidth:1.5}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:noL,scales:{x:gx,y:{min:0,max:235,grid:{color:C.grid},ticks:{callback:v=>v+'g'}}}}});
+charts.c=new Chart(document.getElementById('cchart'),{data:{labels:days,datasets:[
+  {type:'bar',data:[2155,2520,2495,2450,2290,3106],backgroundColor:[C.orange,C.orange,C.orange,C.orange,C.orange,C.orange],borderRadius:6,barPercentage:.55},
+  {type:'line',data:[2450,2614,3033,2797,2342,3690],borderColor:C.sky,pointRadius:3,pointBackgroundColor:C.sky,borderWidth:1.8,spanGaps:false}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:noL,scales:{x:gx,y:{min:0,max:3900,grid:{color:C.grid}}}}});
+charts.m=new Chart(document.getElementById('mchart'),{type:'bar',data:{labels:days,datasets:[
+  {label:'Protein',data:[129,173,215,224,205,177],backgroundColor:C.coral,borderRadius:3},
+  {label:'Fat',data:[106,127,81,94,98,101],backgroundColor:C.orange,borderRadius:3},
+  {label:'Carbs',data:[154,171,216,178,153,378],backgroundColor:C.gold,borderRadius:3}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:12,font:{size:11}}}},scales:{x:gx,y:{grid:{color:C.grid},ticks:{callback:v=>v+'g'}}}}});
+const meals=[
+  {d:'Tuesday 16 Jun',items:[
+    ['Breakfast','Salmon, eggs, avocado on muffin',44,690],
+    ['Lunch','Chicken-mayo + roast-veg sandwiches, potato salad',37,795],
+    ['Dinner','Roasted beef fillet, dauphinoise, asparagus',47,620],
+    ['Drink','Peroni Nastro Azzurro 0.0',1,50]]},
+  {d:'Wednesday 17 Jun',items:[
+    ['Breakfast','Salmon, 4 poached eggs, avocado bagel',54,780],
+    ['Lunch','Chermoula chicken skewers (2), kale caesar, pita (grapes left)',46,675],
+    ['Coffee','Piccolo, full-cream milk',2,30],
+    ['Coffee','Piccolo, full-cream milk (2nd, larger)',4,60],
+    ['Dinner','Chicken Rappa wrap, double chicken, mayo',42,810],
+    ['Dessert','Homemade protein ice cream — WPI (1 of 3 serves)',25,165]]},
+  {d:'Thursday 18 Jun',items:[
+    ['Breakfast','Overnight oats bowl, no PB — oats, VPA, chia, flax, EOSS passionfruit yoghurt, berries, mixed nuts',45,585],
+    ['Coffee','Espresso, single shot black — pre-session',0,2],
+    ['Ride fuel','50 g glucose + electrolytes — during Sweet Spot',0,200],
+    ['Shake','Protein shake — 1 scoop VPA with water',26,115],
+    ['Pre-workout','Grilled salmon (87 g) + brown rice (70 g)',23,275],
+    ['Espresso','Single shot, black',0,2],
+    ['Snack','Overnight oats #2 — yoghurt, berries (no nuts/PB)',41,475],
+    ['Dinner','Chicken souvlaki (2 skewers), grilled pita, red cabbage slaw — no chips',55,675],
+    ['Dessert','Homemade protein ice cream — WPI (1 serve)',25,165]]},
+  {d:'Friday 19 Jun',items:[
+    ['Breakfast','Overnight oats bowl — oats, VPA, chia, flax, EOSS passionfruit yoghurt, berries, mixed nuts',45,585],
+    ['Coffee','Espresso, single shot black — with breakfast',0,2],
+    ['Post-ride','Recovery smoothie — 2 scoops VPA, A2 full-cream milk, ½ frozen banana',61,460],
+    ['Coffee','Piccolo, full-cream milk',2,30],
+    ['Dinner','Charcoal chicken (2 pieces, skin off), chips, beetroot, garden salad',56,825],
+    ['Dinner +','Second helping — chicken (drumstick + breast), beetroot, salad',35,385],
+    ['Dessert','Homemade protein ice cream — WPI (1 serve)',25,165]]},
+  {d:'Saturday 20 Jun',items:[
+    ['Breakfast','Overnight oats base (oats, VPA, chia, flax — no milk), Farmers Union hi-pro yoghurt, ½ banana, nut & seed mix',45,615],
+    ['Coffee','2 × espresso, black',0,4],
+    ['Post-legs','Protein shake — 2 scoops VPA (water)',52,230],
+    ['Brunch','Chilli scrambled eggs (ham, tomato, fried shallots) + 1 roti',29,590],
+    ['Coffee','Piccolo, full-cream milk',2,30],
+    ['Dinner','BBQ roast chicken (skin off), garden salad, chips (~85g)',51,645],
+    ['Dessert','Homemade protein ice cream — peanut butter (1 serve)',26,176]]},
+  {d:'Sunday 21 Jun',items:[
+    ['Breakfast','Overnight oats (oats, VPA, chia, flax — no milk), Farmers Union hi-pro yoghurt (1 tbsp less), ½ banana, nut & seed mix',43,605],
+    ['Ride fuel','2 × 100 g glucose:fructose bottles + plain water + electrolytes — on the bike',0,800],
+    ['Post-ride','Recovery shake — 1 scoop VPA (water)',26,115],
+    ['Lunch','Misuzu\'s oyako don — ½ share (karaage-style chicken, egg, rice)',21,385],
+    ['Lunch','Baked scallops — 2 of 4 (cheese-topped)',11,155],
+    ['Lunch','Yakitori chicken skewers — ½ share',12,120],
+    ['Lunch','Chicken gyoza — ½ share',7,140],
+    ['Lunch','Kaiso seaweed salad — ½ share',2,50],
+    ['Dinner','BBQ chicken (¼ breast + 1 drumstick, skin off), coleslaw (mayo, modest), chips 100g',29,560],
+    ['Dessert','Homemade protein ice cream — peanut butter (1 serve)',26,176]]}
+];
+document.getElementById('mealList-w1').innerHTML=meals.map(g=>
+  `<div class="day-h">${g.d}</div>`+g.items.map(m=>
+    `<div class="meal"><div class="nm"><div class="t">${m[0]}</div><div class="s">${m[1]}</div></div>
+     <div class="p">${m[2]}g</div><div class="cal">${m[3]} cal</div></div>`).join('')
+).join('');
+const meals2=[
+  {d:'Monday 22 Jun',items:[
+    ['Coffee','Espresso, single shot black — pre-ride, fasted',0,2],
+    ['Post-ride','Recovery smoothie — 2 scoops VPA, ½ banana, ½ cup blueberries, ½ cup Chobani Greek yoghurt, water',65,395]]}
+];
+document.getElementById('mealList-w2').innerHTML=meals2.map(g=>
+  `<div class="day-h">${g.d}</div>`+g.items.map(m=>
+    `<div class="meal"><div class="nm"><div class="t">${m[0]}</div><div class="s">${m[1]}</div></div>
+     <div class="p">${m[2]}g</div><div class="cal">${m[3]} cal</div></div>`).join('')
+).join('');
+charts.lipid=new Chart(document.getElementById('lipid'),{data:{labels:['Apr 25','Jun 25','Mar 26'],datasets:[
+  {label:'Cholesterol',data:[5.7,3.4,3.8],borderColor:C.coral,backgroundColor:C.coral,tension:.3,pointRadius:4,borderWidth:2},
+  {label:'LDL-c',data:[3.9,1.9,2.1],borderColor:C.violet,backgroundColor:C.violet,tension:.3,pointRadius:4,borderWidth:2},
+  {label:'HDL-c',data:[1.1,1.2,1.3],borderColor:C.gold,backgroundColor:C.gold,tension:.3,pointRadius:4,borderWidth:2},
+  {label:'Triglycerides',data:[1.5,0.7,0.9],borderColor:C.pink,backgroundColor:C.pink,tension:.3,pointRadius:4,borderWidth:2},
+  {label:'limit',data:[5.6,5.6,5.6],borderColor:C.t3,borderDash:[5,4],pointRadius:0,borderWidth:1.3}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:noL,scales:{x:gx,y:{min:0,max:6.5,grid:{color:C.grid}}}}});
+charts.gluc=new Chart(document.getElementById('gluc'),{data:{labels:['Apr 23','Apr 25','Mar 26'],datasets:[
+  {label:'Fasting glucose',data:[5.7,5.2,4.6],borderColor:C.coral,backgroundColor:C.coral,tension:.3,pointRadius:4,borderWidth:2},
+  {label:'limit',data:[5.4,5.4,5.4],borderColor:C.t3,borderDash:[5,4],pointRadius:0,borderWidth:1.3}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:noL,scales:{x:gx,y:{min:0,max:6.5,grid:{color:C.grid}}}}});
+charts.power=new Chart(document.getElementById('power'),{type:'bar',data:{labels:['5s','1min','5min','20min','1hr'],datasets:[
+  {data:[835,446,321,271,233],backgroundColor:C.coral,borderRadius:5}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:noL,scales:{x:gx,y:{grid:{color:C.grid},ticks:{callback:v=>v+'W'}}}}});
+charts.hrv=new Chart(document.getElementById('hrv'),{data:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],datasets:[
+  {type:'line',data:[41,36,40,46,36,39,44],borderColor:C.sky,backgroundColor:C.sky,tension:.3,pointRadius:6,
+   pointBackgroundColor:['#74c490','#d9922b','#74c490','#74c490','#d9922b','#74c490','#74c490'],pointBorderColor:['#74c490','#d9922b','#74c490','#74c490','#d9922b','#74c490','#74c490'],borderWidth:2.2,yAxisID:'y'},
+  {type:'line',data:[60,57,57,58,60,56,55],borderColor:C.violet,backgroundColor:C.violet,tension:.3,pointRadius:4,borderWidth:1.8,yAxisID:'y2'},
+  {type:'line',data:[38,38,38,38,38,38,38],borderColor:C.gold,borderDash:[5,4],pointRadius:0,borderWidth:1.2,yAxisID:'y'},
+  {type:'line',data:[36,36,36,36,36,36,36],borderColor:C.coral,borderDash:[5,4],pointRadius:0,borderWidth:1.2,yAxisID:'y'}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:noL,scales:{x:gx,
+  y:{position:'left',min:30,max:50,grid:{color:C.grid},ticks:{callback:v=>v+'ms'}},
+  y2:{position:'right',min:45,max:70,grid:{display:false},ticks:{callback:v=>v+'bpm'}}
+}}});
+</script>
+
+
+</body></html>
